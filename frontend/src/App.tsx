@@ -21,7 +21,7 @@ function App() {
   }, []);
 
   const clickCreate = () => {
-    clientService.createClient(new Client({
+    clientService.create(new Client({
       name: 'Teddy',
       identification: '123123',
       dob: new Date(),
@@ -33,7 +33,7 @@ function App() {
   }
 
   const clickUpdate = () => {
-    clientService.updateClient(22, new Client({
+    clientService.update(22, new Client({
       name: 'Teddy',
       identification: '123123',
       dob: new Date(),
@@ -45,7 +45,7 @@ function App() {
   }
 
   const clickDelete = () => {
-    clientService.deleteClient(22).then((response) => {
+    clientService.delete(22).then((response) => {
       console.log(">>>Response", response)
     })
   }

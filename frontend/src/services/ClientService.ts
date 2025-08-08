@@ -25,7 +25,7 @@ export class ClientService extends BaseService {
     }
   }
 
-  async createClient(client: Client): Promise<ServiceResponse> {
+  async create(client: Client): Promise<ServiceResponse> {
     try {
       await this.api.post('/', client.serialize());
       return {
@@ -43,7 +43,7 @@ export class ClientService extends BaseService {
     }
   }
 
-  async updateClient(id: number, client: Client): Promise<ServiceResponse> {
+  async update(id: number, client: Client): Promise<ServiceResponse> {
     try {
       await this.api.put(`/${id}`, client.serialize());
       return {
@@ -61,7 +61,7 @@ export class ClientService extends BaseService {
     }
   }
 
-  async deleteClient(id: number): Promise<ServiceResponse> {
+  async delete(id: number): Promise<ServiceResponse> {
     try {
       await this.api.delete(`/${id}`);
       return {
