@@ -1,24 +1,75 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import { Client } from './models/Client';
+import { ClientService } from './services/ClientService';
 import './App.css';
 
+const clientService = new ClientService();
+
+
 function App() {
+  const [clients, setClients] = useState<Client[]>([]);
+  const [client, setClient] = useState<Client>(new Client());
+
+  useEffect(() => {
+    clientService.getAll()
+      .then(setClients)
+      .catch(console.error);
+
+    clientService.getById(1)
+      .then(setClient)
+      .catch(console.error);   
+  }, []);
+
+  const clickCreate = () => {
+    clientService.createClient(new Client({
+      name: 'Teddy',
+      identification: 'XXX1xx23',
+      dob: new Date(),
+      main_language: 'Mandarin',
+      funding_source_id: 1
+    })).then((response) => {
+      console.log(">>>Response", response)
+    })
+  }
+
+  const clickUpdate = () => {
+    clientService.updateClient(22, new Client({
+      name: 'Teddy',
+      identification: 'XXX12asdasd3',
+      dob: new Date(),
+      main_language: 'Mandarinx',
+      funding_source_id: 3
+    })).then((response) => {
+      console.log(">>>Response", response)
+    })
+  }
+
+  const clickDelete = () => {
+    clientService.deleteClient(22).then((response) => {
+      console.log(">>>Response", response)
+    })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <h2>Clients</h2>
+          {clients.map((client) => (
+            <div key={client.id}>
+              {client.name} - {client.funding_source_name}
+            </div>
+          ))}
+
+          <div>
+            Client:
+            {client.name} {client.dob}
+          </div>
+
+          <button onClick={clickCreate}>Create</button>
+          <button onClick={clickUpdate}>Update</button>
+          <button onClick={clickDelete}>Delete</button>
+          
+      </div>
     </div>
   );
 }
