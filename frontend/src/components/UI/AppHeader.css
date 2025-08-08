@@ -1,0 +1,29 @@
+.app-header { 
+  background-color: #1976d2; 
+  padding: 1rem;
+  color: #fff;
+
+  nav {
+    max-width: 960px; 
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-container{
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .link-container { 
+    display: flex;
+    gap: 1rem;
+  }
+
+  .app-link {
+    color: #fff; 
+    text-decoration: none;
+    font-weight: bold;
+  }
+}

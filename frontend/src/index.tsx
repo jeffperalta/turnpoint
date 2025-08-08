@@ -1,15 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import AppLayout from './layouts/AppLayout';
+import LandingPage from './pages/LandingPage';
+import ClientPage from './pages/client/ClientPage';
 import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<LandingPage />} />
+          <Route path="clients" element={<ClientPage />} />
+        </Route>
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 

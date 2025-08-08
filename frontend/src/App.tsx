@@ -23,7 +23,7 @@ function App() {
   const clickCreate = () => {
     clientService.createClient(new Client({
       name: 'Teddy',
-      identification: 'XXX1xx23',
+      identification: '123123',
       dob: new Date(),
       main_language: 'Mandarin',
       funding_source_id: 1
@@ -35,9 +35,9 @@ function App() {
   const clickUpdate = () => {
     clientService.updateClient(22, new Client({
       name: 'Teddy',
-      identification: 'XXX12asdasd3',
+      identification: '123123',
       dob: new Date(),
-      main_language: 'Mandarinx',
+      main_language: 'Mandarin',
       funding_source_id: 3
     })).then((response) => {
       console.log(">>>Response", response)
