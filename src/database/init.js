@@ -1,5 +1,13 @@
+const mysql = require('mysql2');
+
 require('dotenv').config();
-const db = require('./db');
+const db = mysql.createPool({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
 
 const _createTable = (tableName, createStatement, fnxSeed) => {
   db.query(
@@ -56,13 +64,49 @@ function initDatabase() {
       created_at DATE NOT NULL,
       updated_at DATE NULL,
       id INT AUTO_INCREMENT PRIMARY KEY,
+      identification VARCHAR(255) UNIQUE,
       name VARCHAR(255) NOT NULL,
       date_of_birth DATE NOT NULL,
       main_language VARCHAR(255),
       secondary_language VARCHAR(255),
-      funding_source_id INT,
+      funding_source_id INT NULL,
       FOREIGN KEY(funding_source_id) REFERENCES funding_sources(id)
-    )`
+    )`,
+    () => {
+      // Seed 
+      const newDate = new Date();
+      const sources = [{
+        'created_at': newDate,
+        'updated_at': newDate,
+        'identification': 'G1231234Q',
+        'name': 'John Doe',
+        'date_of_birth': new Date('1980-01-01').toISOString().split('T')[0],
+        'main_language': 'English',
+        'secondary_language': 'Spanish',
+        'funding_source_id': 1
+      },{
+        'created_at': newDate,
+        'updated_at': newDate,
+        'identification': 'P1234-2323-1',
+        'name': 'Jane Doe',
+        'date_of_birth': new Date('1990-12-31').toISOString().split('T')[0],
+        'main_language': 'Filipino',
+        'secondary_language': 'Mandarin',
+        'funding_source_id': null
+      }];
+
+      sources.forEach(source => {
+        const keys = Object.keys(source);
+        const values = Object.values(source);
+        const placeholders = keys.map(() => '?').join(', ');
+
+        db.query(`
+          INSERT INTO clients (${keys.join(', ')}) 
+          VALUES (${placeholders})
+        `,values
+        );
+      });
+    }
   )
 
   // Table: users (authentication)
