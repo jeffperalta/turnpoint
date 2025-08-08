@@ -1,6 +1,48 @@
 const express = require('express')
 const router = express.Router();
 const db = require('../database/db');
+const Joi = require('joi');
+
+const _validationSchema = (client) => {
+  const schema = Joi.object({
+    identification: Joi.string(),
+    name: Joi.string().min(3).required(),
+    date_of_birth: Joi.date()
+      .less('now')  // must be in the past
+      .required()   
+      .label('Date of Birth'),
+    main_language: Joi.string()
+      .required()
+      .label('Main Language'),
+    secondary_language: Joi.string()
+      .empty('')
+      .allow(null)
+      .label('Secondary Language'), 
+    funding_source_id: Joi.number()
+      .allow(null)
+      .label('Funding Source')
+  });
+
+  return schema.validate(client);
+}
+
+const _validate = (client) => {
+  const validation = _validationSchema(client);
+  const result = {
+    hasError: false,
+    status: 200,
+    message: ""
+  };
+
+  if(validation.error) {
+    result.hasError = true;
+    result.status = 400;
+    result.message = validation.error.details[0].message;
+  }
+
+  return result;
+}
+
 
 router.get('/', async (req, res) => {
   try{
@@ -9,7 +51,7 @@ router.get('/', async (req, res) => {
     const fields = [
       'c.created_at', 
       'c.updated_at',
-      //'c.client_id',
+      'c.identification',
       'c.id', 
       'c.name',
       'DATE_FORMAT(c.date_of_birth, \'%Y-%m-%d\') AS date_of_birth',
@@ -38,7 +80,7 @@ router.get('/:id', async (req, res) => {
     const fields = [
       'c.created_at', 
       'c.updated_at',
-      //'c.identification',
+      'c.identification',
       'c.id', 
       'c.name',
       'DATE_FORMAT(c.date_of_birth, \'%Y-%m-%d\') AS date_of_birth',
@@ -65,6 +107,12 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  const validation = _validate(req.body);
+  if(validation.hasError) {
+    return res.status(validation.status)
+      .send(validation.message);
+  }
+
   const { 
     identification,
     name, 
@@ -104,6 +152,12 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
+  const validation = _validate(req.body);
+  if(validation.hasError) {
+    return res.status(validation.status)
+      .send(validation.message);
+  }
+
   const id = req.params.id;
   const { 
     identification,
