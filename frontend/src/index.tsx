@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import AppLayout from './layouts/AppLayout';
 import LandingPage from './pages/LandingPage';
 import ClientPage from './pages/client/ClientPage';
+import { ToastContainer } from 'react-toastify';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
@@ -24,6 +25,13 @@ root.render(
           <Route path="clients/create" element={<CreateClientPage />} />
         </Route>
       </Routes>
+
+      <ToastContainer 
+        position="top-center" 
+        autoClose={3000} 
+        closeOnClick
+        hideProgressBar={true}
+      />
     </Router>
   </React.StrictMode>
 );

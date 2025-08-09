@@ -6,7 +6,10 @@ import WizardHeader from '../../components/UI/WizardHeader';
 import { Client } from '../../models/Client';
 import ClientSummaryCard from './components/ClientSummaryCard';
 import { FundingService } from '../../services/FundingService';
+import { ClientService } from '../../services/ClientService';
 import { Funding } from '../../models/Funding';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const STEPS = ['Basic info', 'Funding', 'Summary'];
 
@@ -31,10 +34,12 @@ const fieldsByStep = [
 ];
 
 const fundingService = new FundingService();
+const clientService = new ClientService();
 
 export default function CreateClientPage() {
   const [step, setStep] = useState(0);
   const [fundings, setFundings] = useState<Funding[]>([]);
+  const navigate = useNavigate();
 
   const load = useCallback(async ()=> {
     const rows = await fundingService.getAll();
@@ -82,9 +87,20 @@ export default function CreateClientPage() {
         validateOnBlur={true}
         validateOnChange={false}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(">>>HEY submit", step)
-          console.log('Created:', values);
-          alert('Client created! Check console for payload.');
+          console.log(">>>HEY submit", step, values);
+          clientService.create(values)
+            .then(res => {
+              console.log(">>>HEY Create response", res);
+
+              if(res.success) {
+                toast.success(res.message);
+                navigate('/clients');
+              }else{
+                toast.error(res.message);
+                setSubmitting(false);
+              }
+              
+            });
         }}
       >
         {({ values, errors, validateForm, setTouched, isSubmitting, handleSubmit }) => (
