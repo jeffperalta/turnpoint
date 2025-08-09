@@ -1,0 +1,46 @@
+.wizard-header-container { 
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  .step--container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .step{
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 600;
+      background: #c5c5c5;
+    }
+
+    .step--completed {
+      background: #1976d2;
+    }
+
+    .label {
+      color: #555;
+      font-weight: 500;
+    }
+
+    .label--active {
+      color: #1976d2;
+      font-weight: 600;
+    }
+
+    .line {
+      width: 50px;
+      height: 2px;
+      background: #ddd;
+      margin-left: 8px;
+      margin-right: 8px 
+    }
+  }
+}
+
+

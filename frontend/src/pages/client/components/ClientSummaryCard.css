@@ -1,0 +1,16 @@
+.client-summary-card--container {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  
+  dl {
+    display: grid; 
+    grid-template-columns: 160px 1fr; 
+    row-gap: 8px;
+    column-gap: 12px; 
+  }
+
+  dt {
+    color: #666;
+  }
+}

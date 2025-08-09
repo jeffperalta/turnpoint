@@ -7,6 +7,7 @@ import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CreateClientPage from './pages/client/CreateClientPage';
 
 
 const root = ReactDOM.createRoot(
@@ -20,6 +21,7 @@ root.render(
         <Route path="/" element={<AppLayout />}>
           <Route index element={<LandingPage />} />
           <Route path="clients" element={<ClientPage />} />
+          <Route path="clients/create" element={<CreateClientPage />} />
         </Route>
       </Routes>
     </Router>
