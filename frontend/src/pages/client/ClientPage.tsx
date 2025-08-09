@@ -40,7 +40,7 @@ export default function ClientPage() {
     },
     { accessorKey: 'main_language', header: 'Main Language' },
     { accessorKey: 'secondary_language', header: 'Secondary Language'},
-    { accessorKey: 'funding_source_name', header: 'Funding Source' },
+    { accessorKey: 'funding.name', header: 'Funding Source' },
   ], []);
 
   async function handleDelete(id?: number) {

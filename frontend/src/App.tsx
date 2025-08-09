@@ -56,7 +56,7 @@ function App() {
         <h2>Clients</h2>
           {clients.map((client) => (
             <div key={client.id}>
-              {client.name} - {client.funding_source_name}
+              {client.name} - {client.funding.name}
             </div>
           ))}
 

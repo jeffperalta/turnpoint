@@ -1,3 +1,5 @@
+import { Funding } from "./Funding";
+
 export class Client {
   id: number;
   identification: string;
@@ -5,8 +7,9 @@ export class Client {
   dob: string;
   main_language: string;
   secondary_language: string;
+  funding: Funding;
+
   funding_source_id: number;
-  funding_source_name: string;
 
   constructor(json?: any) {
     this.id = json?.id ?? '';
@@ -16,7 +19,10 @@ export class Client {
     this.main_language = json?.main_language ?? '';
     this.secondary_language = json?.secondary_language ?? '';
     this.funding_source_id = json?.funding_source_id ?? null;
-    this.funding_source_name = json?.funding_source_name ?? null;
+    this.funding = Funding.deserialize({
+      id: this.funding_source_id,
+      name: json?.funding_source_name ?? null
+    })
   }
 
   static deserialize(json: any) {

@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './CreateClientPage.css';
 import WizardHeader from '../../components/UI/WizardHeader';
 import { Client } from '../../models/Client';
 import ClientSummaryCard from './components/ClientSummaryCard';
+import { FundingService } from '../../services/FundingService';
+import { Funding } from '../../models/Funding';
 
 const STEPS = ['Basic info', 'Funding', 'Summary'];
 
@@ -28,17 +30,19 @@ const fieldsByStep = [
   [],
 ];
 
-//TODO: create an api for this
-const fundingOptions = [
-  {id: 1, name: 'NDIS' },
-  {id: 2, name: 'HCP' },
-  {id: 3, name: 'CHSP' },
-  {id: 4, name: 'DVA' },
-  {id: 5, name: 'HACC' },
-];
+const fundingService = new FundingService();
 
 export default function CreateClientPage() {
   const [step, setStep] = useState(0);
+  const [fundings, setFundings] = useState<Funding[]>([]);
+
+  const load = useCallback(async ()=> {
+    const rows = await fundingService.getAll();
+    setFundings(rows);
+  }, []);
+  
+  useEffect(() => { load(); }, [load]);
+  useEffect(() => {console.log(fundings)}, [fundings])
 
   const next = async (validateForm: any, setTouched: any, values: any, errors: any) => {
     console.log(">>>HEY next", values, errors);
@@ -138,7 +142,7 @@ export default function CreateClientPage() {
                   <label htmlFor="funding_source_id">Funding Source</label>
                   <Field as="select" id="funding_source_id" name="funding_source_id">
                     <option value="">Select a funding source…</option>
-                    {fundingOptions.map((o) => (
+                    {fundings.map((o) => (
                       <option key={o.id} value={o.id}>{o.name}</option>
                     ))}
                   </Field>
@@ -155,7 +159,7 @@ export default function CreateClientPage() {
               step === 2 && 
               <ClientSummaryCard 
                 client={values} 
-                fundings={fundingOptions} 
+                fundings={fundings} 
               />
             }
 
