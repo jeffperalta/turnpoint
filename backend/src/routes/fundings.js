@@ -21,7 +21,6 @@ router.post('/check-eligibility', async (req, res) => {
     }
 
     const { name, description, fullName, fakeEligibilityResult } = rows[0];
-    console.log(fakeEligibilityResult);
     const parsed = JSON.parse(fakeEligibilityResult);
 
     res.status(201).json({

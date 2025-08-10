@@ -24,16 +24,22 @@ export default function FundingField({
   const [fundingEligibility, setFundingEligibility] = useState<Funding | null>(null);
 
   const checkEligibility = useCallback(async (fundingId: string) => {
-    setFundingEligibility(null);
-    const result = await fundingService.checkElibility({
-      fundingId: fundingId
-    });
-    const fundingEligibilityResults = result.data as Funding | null;
-    setFundingEligibility(fundingEligibilityResults);
-    setFieldValue("funding_source_id", fundingId);
-    const eligibilityValue = fundingEligibilityResults?.eligibilityResult ? "valid":"invalid";
-    setFieldValue("funding_eligibility", eligibilityValue);
-    if(eligibilityValue==="valid") setFieldError("funding_eligibility",  undefined)
+    if(fundingId) {
+      setFundingEligibility(null);
+      const result = await fundingService.checkElibility({
+        fundingId: fundingId
+      });
+      const fundingEligibilityResults = result.data as Funding | null;
+      setFundingEligibility(fundingEligibilityResults);
+      setFieldValue("funding_source_id", fundingId);
+      const eligibilityValue = fundingEligibilityResults?.eligibilityResult ? "valid":"invalid";
+      setFieldValue("funding_eligibility", eligibilityValue);
+      if(eligibilityValue==="valid") setFieldError("funding_eligibility",  undefined)
+    }else{
+      setFieldValue("funding_source_id", fundingId);
+      setFieldValue("funding_eligibility", "");
+      setFieldError("funding_eligibility",  undefined)
+    }
   }, []);
 
   useEffect(() => {

@@ -13,20 +13,7 @@ import { getLanguages } from '../../utility/LangUtil';
 import './CreateClientPage.css';
 import FundingField from './components/FundingField';
 
-const updateSchema = Yup.object({
-  name: Yup.string().trim().min(2, 'Too short').required('Name is required'),
-  identification: Yup.string().trim().required('Identification is required'),
-  dob: Yup.date().max(new Date(), 'DOB must be in the past').required('Date of Birth is required'),
-  main_language: Yup.string().trim().required('Main Language is required'),
-  secondary_language: Yup.string(),
-  funding_source_id: Yup.number().required('Funding Source is required'),
-  funding_eligibility: Yup.string().test(
-    "eligibility-check",
-    'Must be eligible for the funding source',
-    value => !value || value.toLowerCase() === "valid"
-  )
-});
-
+const updateSchema = Yup.object(Client.validationSchema());
 const fundingService = new FundingService();
 const clientService = new ClientService();
 
@@ -173,19 +160,6 @@ export default function UpdateClientPage() {
               </div>
 
               <h3>Funding</h3>
-              {/* <div>
-                <label htmlFor="funding_source_id">Funding Source</label>
-                <Field as="select" id="funding_source_id" name="funding_source_id">
-                  <option value="">Select a funding source…</option>
-                  {dataSources.fundings.map((o) => (
-                    <option key={o.id} value={o.id}>{o.name}</option>
-                  ))}
-                </Field>
-                <ErrorMessage
-                  name="funding_source_id"
-                  render={msg => <div className="error-message">{msg}</div>}
-                />
-              </div> */}
               <FundingField 
                 formValue={values}
                 fundings={dataSources.fundings}

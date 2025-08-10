@@ -40,7 +40,7 @@ function initDatabase() {
         {
           name: 'HCP',
           fullName: 'Home Care Package',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar non dui quis auctor. Aliquam imperdiet, elit ut faucibus bibendum, sem justo accumsan odio, sit amet fermentum arcu mi id nibh.',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam facilisis auctor nulla, vitae elementum est commodo nec. Aliquam orci nisl, feugiat eu urna id, efficitur faucibus tortor. Duis a ante vel est consequat luctus sit amet at velit. Duis vitae egestas mauris. Donec lobortis ipsum eu nunc fermentum, quis dapibus dui rutrum.',
           sampleEligibilityURL: 'https://www.hcp.com',
           fakeEligibilityResult: '{"result": "valid", "message": "Meets age requirement and residency criteria."}'
         },
