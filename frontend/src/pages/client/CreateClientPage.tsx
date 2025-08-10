@@ -11,6 +11,8 @@ import { Funding } from '../../models/Funding';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { getLanguages } from '../../utility/LangUtil';
+import EligibilityCard from '../../components/FundingCard';
+import Empty from '../../components/UI/Empty';
 
 const STEPS = ['Basic info', 'Funding', 'Summary'];
 
@@ -24,13 +26,18 @@ const stepSchemas = [
   }),
   Yup.object({
     funding_source_id: Yup.number().required('Funding Source is required'),
+    eligibility: Yup.string().test(
+      "eligibility-check",
+      'Must be eligible for the funding source',
+      value => !value || value.toLowerCase() === "valid"
+    )
   }),
   Yup.object({}), 
 ];
 
 const fieldsByStep = [
   ['name', 'identification', 'dob', 'main_language', 'secondary_language'],
-  ['funding_source_id'],
+  ['funding_source_id', 'eligibility'],
   [],
 ];
 
@@ -102,7 +109,7 @@ export default function CreateClientPage() {
             });
         }}
       >
-        {({ values, errors, validateForm, setTouched, isSubmitting }) => (
+        {({ values, errors, validateForm, setTouched, isSubmitting, setFieldValue }) => (
           <Form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {/* Step 1: Basic info */}
             {step === 0 && (
@@ -169,7 +176,17 @@ export default function CreateClientPage() {
               <>
                 <div>
                   <label htmlFor="funding_source_id">Funding Source</label>
-                  <Field as="select" id="funding_source_id" name="funding_source_id">
+                  <Field 
+                    as="select" 
+                    id="funding_source_id" 
+                    name="funding_source_id"
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                      const value = e.target.value;
+                      setFieldValue("funding_source_id", value);
+                      //setFieldValue("eligibility", "invalid");
+                      setFieldValue("eligibility", "valid");
+                    }}
+                  >
                     <option value="">Select a funding source…</option>
                     {fundings.map((o) => (
                       <option key={o.id} value={o.id}>{o.name}</option>
@@ -179,6 +196,29 @@ export default function CreateClientPage() {
                     name="funding_source_id"
                     render={msg => <div className="error-message">{msg}</div>}
                   />
+
+                  <Field type="hidden" name="eligibility" />
+                  <ErrorMessage
+                    name="eligibility"
+                    render={msg => <div className="error-message">{msg}</div>}
+                  />
+                </div>
+                <div>
+                  {
+                    !values.funding_source_id && 
+                    <Empty 
+                      message='Please select a funding source'
+                    />
+                  }
+                  {
+                    !!values.funding_source_id && 
+                    <EligibilityCard
+                      title="Title – ABC"
+                      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae."
+                      eligibilitySummary="Meets age requirement and residency criteria."
+                      eligible
+                    />
+                  }
                 </div>
               </>
             )}
