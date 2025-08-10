@@ -136,20 +136,22 @@ export default function UpdateClientPage() {
                   render={msg => <div className="error-message">{msg}</div>}
                 />
               </div>
-              <div>
-                <label htmlFor="main_language">Main Language</label>
-                <Field as="select" id="main_language" name="main_language">
-                  <option value="">Select a main language…</option>
-                  {getLanguages().map((o) => (
-                    <option key={o.id} value={o.id}>{o.name}</option>
-                  ))}
-                </Field>
-                <ErrorMessage
-                  name="main_language"
-                  render={msg => <div className="error-message">{msg}</div>}
-                />
-              </div>
-              <div>
+              <div className="form-row">
+                <div>
+                  <label htmlFor="main_language">Main Language</label>
+                  <Field as="select" id="main_language" name="main_language">
+                    <option value="">Select a main language…</option>
+                    {getLanguages().map((o) => (
+                      <option key={o.id} value={o.id}>{o.name}</option>
+                    ))}
+                  </Field>
+                  <ErrorMessage
+                    name="main_language"
+                    render={msg => <div className="error-message">{msg}</div>}
+                  />
+                </div>
+
+                <div>
                   <label htmlFor="secondary_language">Secondary Language</label>
                   <Field as="select" id="secondary_language" name="secondary_language">
                     <option value="">Select a secondary language…</option>
@@ -162,6 +164,7 @@ export default function UpdateClientPage() {
                     render={msg => <div className="error-message">{msg}</div>}
                   />
                 </div>
+              </div>
 
               <h3>Funding</h3>
               <div>
