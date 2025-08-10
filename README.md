@@ -1,5 +1,5 @@
 # TurnPoint Software Challenge
-# Name: Jo Jefferson Peralta
+## Name: Jo Jefferson Peralta
 
 A client management web application built with React, Node.js, Express, and MySQL.
 
@@ -13,6 +13,17 @@ Before you begin, ensure you have the following installed:
 ## 🚀 Download & Install
 ```bash
 git clone https://github.com/jeffperalta/turnpoint.git
+
+Folder Structure:
+turnpoint/
+├── backend/
+├──────.env
+├── frontend/
+├──────.env
+├── mysql-db/
+├──────docker-compose.yml
+
+```bash
 cd turnpoint
 npm install
 
