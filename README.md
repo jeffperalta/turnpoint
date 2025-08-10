@@ -10,19 +10,20 @@ Before you begin, ensure you have the following installed:
 - [Docker](https://www.docker.com/) v20+  
 - [Docker Compose](https://docs.docker.com/compose/) v2+
 
-## 🚀 Download & Install
+## 💾 Download & Install
 ```bash
 git clone https://github.com/jeffperalta/turnpoint.git
 
 Folder Structure:
 turnpoint/
 ├── backend/
-├──────.env
+│   └── .env
 ├── frontend/
-├──────.env
+│   └── .env
 ├── mysql-db/
-├──────docker-compose.yml
+│   └── docker-compose.yml
 
+## 🚀 Run
 ```bash
 cd turnpoint
 npm install
