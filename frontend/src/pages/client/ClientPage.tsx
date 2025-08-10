@@ -84,7 +84,7 @@ export default function ClientPage() {
           <Box sx={{ display: 'flex', gap: 1 }}>
             <IconButton
               color="primary"
-              onClick={() => navigate(`/clients/${row.original.id}/edit`)}
+              onClick={() => navigate(`/clients/update/${row.original.id}`)}
             >
               <EditIcon />
             </IconButton>

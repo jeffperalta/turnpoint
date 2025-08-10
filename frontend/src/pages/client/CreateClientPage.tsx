@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './CreateClientPage.css';
-import WizardHeader from '../../components/UI/WizardHeader';
+import WizardHeader from '../../components/WizardHeader';
 import { Client } from '../../models/Client';
 import ClientSummaryCard from './components/ClientSummaryCard';
 import { FundingService } from '../../services/FundingService';
@@ -47,7 +47,6 @@ export default function CreateClientPage() {
   }, []);
   
   useEffect(() => { load(); }, [load]);
-  useEffect(() => {console.log(fundings)}, [fundings])
 
   const next = async (validateForm: any, setTouched: any, values: any, errors: any) => {
     console.log(">>>HEY next", values, errors);
@@ -74,7 +73,7 @@ export default function CreateClientPage() {
   const back = () => setStep((s) => Math.max(0, s - 1));
 
   return (
-    <div className="create-client-page-container">
+    <div className="client-form-container">
       <h2>Create New Client</h2>
       <WizardHeader 
         wizardSteps={STEPS}
@@ -99,11 +98,10 @@ export default function CreateClientPage() {
                 toast.error(res.message);
                 setSubmitting(false);
               }
-              
             });
         }}
       >
-        {({ values, errors, validateForm, setTouched, isSubmitting, handleSubmit }) => (
+        {({ values, errors, validateForm, setTouched, isSubmitting }) => (
           <Form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {/* Step 1: Basic info */}
             {step === 0 && (

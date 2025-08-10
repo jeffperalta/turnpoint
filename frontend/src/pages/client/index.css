@@ -1,0 +1,49 @@
+.client-form-container {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+  input {
+    width: 97%; 
+    padding: 8px;
+  }
+
+  select {
+    width: 100%; 
+    padding: 8px;
+  }
+
+  label {
+    display: block; 
+    margin-bottom: 4px;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 12px;
+  }
+
+  .control--container{
+    display: flex; 
+    justify-content: space-between;
+    margin-top: 8px;
+
+    button {
+      padding: 10px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .cancel--button {
+      border: 1px solid #bbb;
+      background: #fafafa;
+      cursor: pointer;
+    }
+    .action--button {
+      border: none;
+      background: #1976d2; 
+      color: #fff; 
+    }
+  }
+}

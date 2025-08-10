@@ -10,8 +10,6 @@ export default function WizardHeader({
   currentStep = 0,
   ...props
 }: WizardHeaderProps) {
-
-
   return(
     <div className="wizard-header-container">
       {wizardSteps.map((label, i) => (
