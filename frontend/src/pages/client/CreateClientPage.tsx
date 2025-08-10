@@ -10,6 +10,7 @@ import { ClientService } from '../../services/ClientService';
 import { Funding } from '../../models/Funding';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { getLanguages } from '../../utility/LangUtil';
 
 const STEPS = ['Basic info', 'Funding', 'Summary'];
 
@@ -18,7 +19,7 @@ const stepSchemas = [
     name: Yup.string().trim().min(2, 'Too short').required('Name is required'),
     identification: Yup.string().trim().required('Identification is required'),
     dob: Yup.date().max(new Date(), 'DOB must be in the past').required('Date of Birth is required'),
-    main_language: Yup.string().trim().required('Primary Language is required'),
+    main_language: Yup.string().trim().required('Main Language is required'),
     secondary_language: Yup.string()
   }),
   Yup.object({
@@ -131,8 +132,13 @@ export default function CreateClientPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="main_language">Primary Language</label>
-                  <Field id="main_language" name="main_language" placeholder="Main Language"  />
+                  <label htmlFor="main_language">Main Language</label>
+                  <Field as="select" id="main_language" name="main_language">
+                    <option value="">Select a main language…</option>
+                    {getLanguages().map((o) => (
+                      <option key={o.id} value={o.id}>{o.name}</option>
+                    ))}
+                  </Field>
                   <ErrorMessage
                     name="main_language"
                     render={msg => <div className="error-message">{msg}</div>}
@@ -140,7 +146,12 @@ export default function CreateClientPage() {
                 </div>
                 <div>
                   <label htmlFor="secondary_language">Secondary Language</label>
-                  <Field id="secondary_language" name="secondary_language" placeholder="Secondary Language" />
+                  <Field as="select" id="secondary_language" name="secondary_language">
+                    <option value="">Select a secondary language…</option>
+                    {getLanguages().map((o) => (
+                      <option key={o.id} value={o.id}>{o.name}</option>
+                    ))}
+                  </Field>
                   <ErrorMessage
                     name="secondary_language"
                     render={msg => <div className="error-message">{msg}</div>}

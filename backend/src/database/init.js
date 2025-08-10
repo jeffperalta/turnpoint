@@ -44,8 +44,8 @@ function initDatabase() {
       identification VARCHAR(255) UNIQUE,
       name VARCHAR(255) NOT NULL,
       date_of_birth DATE NOT NULL,
-      main_language VARCHAR(255),
-      secondary_language VARCHAR(255),
+      main_language VARCHAR(2),
+      secondary_language VARCHAR(2),
       funding_source_id INT NULL,
       FOREIGN KEY(funding_source_id) REFERENCES funding_sources(id)
     )`,
@@ -58,8 +58,8 @@ function initDatabase() {
         'identification': 'G1231234Q',
         'name': 'John Doe',
         'date_of_birth': new Date('1980-01-01').toISOString().split('T')[0],
-        'main_language': 'English',
-        'secondary_language': 'Spanish',
+        'main_language': 'en',
+        'secondary_language': 'es',
         'funding_source_id': 1
       },{
         'created_at': newDate,
@@ -67,8 +67,8 @@ function initDatabase() {
         'identification': 'P1234-2323-1',
         'name': 'Jane Doe',
         'date_of_birth': new Date('1990-12-31').toISOString().split('T')[0],
-        'main_language': 'Filipino',
-        'secondary_language': 'Mandarin',
+        'main_language': 'tl',
+        'secondary_language': 'zh',
         'funding_source_id': null
       }];
 

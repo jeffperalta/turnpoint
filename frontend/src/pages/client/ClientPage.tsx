@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
+import { getLanguage } from '../../utility/LangUtil';
 
 const clientService = new ClientService();
 
@@ -38,7 +39,14 @@ export default function ClientPage() {
         return value ? format(new Date(value), 'dd MMM yyyy') : '';
       }, 
     },
-    { accessorKey: 'main_language', header: 'Main Language' },
+    { 
+      accessorKey: 'main_language', 
+      header: 'Main Language',
+      Cell: ({ cell }) => {
+        const value = cell.getValue<string>();
+        return value ? getLanguage(value) : '';
+      },  
+    },
     { accessorKey: 'secondary_language', header: 'Secondary Language'},
     { accessorKey: 'funding.name', header: 'Funding Source' },
   ], []);

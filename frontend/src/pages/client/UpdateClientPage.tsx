@@ -9,13 +9,14 @@ import { FundingService } from '../../services/FundingService';
 import { ClientService } from '../../services/ClientService';
 import Loading from '../../components/UI/Loading';
 import { toast } from 'react-toastify';
+import { getLanguages } from '../../utility/LangUtil';
 import './CreateClientPage.css';
 
 const updateSchema = Yup.object({
   name: Yup.string().trim().min(2, 'Too short').required('Name is required'),
   identification: Yup.string().trim().required('Identification is required'),
   dob: Yup.date().max(new Date(), 'DOB must be in the past').required('Date of Birth is required'),
-  main_language: Yup.string().trim().required('Primary Language is required'),
+  main_language: Yup.string().trim().required('Main Language is required'),
   secondary_language: Yup.string(),
   funding_source_id: Yup.number().required('Funding Source is required'),
 });
@@ -136,21 +137,31 @@ export default function UpdateClientPage() {
                 />
               </div>
               <div>
-                <label htmlFor="main_language">Primary Language</label>
-                <Field id="main_language" name="main_language" placeholder="Main Language"  />
+                <label htmlFor="main_language">Main Language</label>
+                <Field as="select" id="main_language" name="main_language">
+                  <option value="">Select a main language…</option>
+                  {getLanguages().map((o) => (
+                    <option key={o.id} value={o.id}>{o.name}</option>
+                  ))}
+                </Field>
                 <ErrorMessage
                   name="main_language"
                   render={msg => <div className="error-message">{msg}</div>}
                 />
               </div>
               <div>
-                <label htmlFor="secondary_language">Secondary Language</label>
-                <Field id="secondary_language" name="secondary_language" placeholder="Secondary Language" />
-                <ErrorMessage
-                  name="secondary_language"
-                  render={msg => <div className="error-message">{msg}</div>}
-                />
-              </div>
+                  <label htmlFor="secondary_language">Secondary Language</label>
+                  <Field as="select" id="secondary_language" name="secondary_language">
+                    <option value="">Select a secondary language…</option>
+                    {getLanguages().map((o) => (
+                      <option key={o.id} value={o.id}>{o.name}</option>
+                    ))}
+                  </Field>
+                  <ErrorMessage
+                    name="secondary_language"
+                    render={msg => <div className="error-message">{msg}</div>}
+                  />
+                </div>
 
               <h3>Funding</h3>
               <div>
