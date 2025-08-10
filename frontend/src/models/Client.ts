@@ -48,7 +48,16 @@ export class Client {
       identification: Yup.string().trim().required('Identification is required'),
       dob: Yup.date().max(new Date(), 'DOB must be in the past').required('Date of Birth is required'),
       main_language: Yup.string().trim().required('Main Language is required'),
-      secondary_language: Yup.string(),
+      secondary_language: Yup.string().trim()
+      .test(
+        "different-secondary-language",
+        "Secondary language must be different from main language",
+        function (value) {
+          const { main_language } = this.parent;
+          if (!value) return true; // allow empty
+          return value !== main_language;
+        }
+      ),
       funding_source_id: Yup.number().nullable(), //.required('Funding Source is required'),
       funding_eligibility: Yup.string().test(
         "eligibility-check",
