@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { getLanguages } from '../../utility/LangUtil';
 import FundingField from './components/FundingField';
+import FormTooltip from '../../components/UI/FormTooltip';
 
 const STEPS = ['Basic info', 'Funding', 'Summary'];
 
@@ -109,7 +110,10 @@ export default function CreateClientPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="identification">Identification</label>
+                  <label htmlFor="identification">
+                    Identification
+                    <FormTooltip message="Enter an official identification number or document reference." />
+                  </label>
                   <Field id="identification" name="identification" placeholder="Identification" />
                   <ErrorMessage
                     name="identification"

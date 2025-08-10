@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { getLanguages } from '../../utility/LangUtil';
 import './CreateClientPage.css';
 import FundingField from './components/FundingField';
+import FormTooltip from '../../components/UI/FormTooltip';
 
 const updateSchema = Yup.object(Client.validationSchema());
 const fundingService = new FundingService();
@@ -114,7 +115,10 @@ export default function UpdateClientPage() {
                 />
               </div>
               <div>
-                <label htmlFor="identification">Identification</label>
+                <label htmlFor="identification">
+                  Identification
+                  <FormTooltip message="Enter an official identification number or document reference." />
+                </label>
                 <Field id="identification" name="identification" placeholder="Identification" />
                 <ErrorMessage
                   name="identification"
