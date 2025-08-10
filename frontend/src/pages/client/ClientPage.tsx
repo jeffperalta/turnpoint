@@ -7,8 +7,6 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link, useNavigate } from 'react-router-dom';
-import { format } from 'date-fns';
-import { getLanguage } from '../../utility/LangUtil';
 
 const clientService = new ClientService();
 
@@ -32,28 +30,22 @@ export default function ClientPage() {
   const columns = useMemo<MRT_ColumnDef<Client>[]>(() => [
     { accessorKey: 'name', header: 'Name' },
     { 
-      accessorKey: 'dob', 
+      accessorKey: 'dob_display', 
       header: 'Date of birth',
-      Cell: ({ cell }) => {
-        const value = cell.getValue<string>();
-        return value ? format(new Date(value), 'dd MMM yyyy') : '';
-      }, 
+      sortingFn: (rowA, rowB) => {
+        // Compare using the raw dob field yyyy-mm-dd
+        const a = new Date(rowA.original.dob).getTime();
+        const b = new Date(rowB.original.dob).getTime();
+        return a - b;
+      },
     },
     { 
-      accessorKey: 'main_language', 
-      header: 'Main Language',
-      Cell: ({ cell }) => {
-        const value = cell.getValue<string>();
-        return value ? getLanguage(value) : '';
-      },  
+      accessorKey: 'main_language_display', 
+      header: 'Main Language' 
     },
     { 
-      accessorKey: 'secondary_language', 
-      header: 'Secondary Language',
-      Cell: ({ cell }) => {
-        const value = cell.getValue<string>();
-        return value ? getLanguage(value) : '';
-      },  
+      accessorKey: 'secondary_language_display', 
+      header: 'Secondary Language' 
     },
     { accessorKey: 'funding.name', header: 'Funding Source' },
   ], []);
@@ -91,7 +83,7 @@ export default function ClientPage() {
           pagination: { pageIndex: 0, pageSize: 10 },
           showGlobalFilter: true,
           columnVisibility: {
-            secondary_language: false, 
+            secondary_language_display: false, 
           },
         }}
         enableRowActions

@@ -1,5 +1,6 @@
 import { Client } from "../../../models/Client";
 import './ClientSummaryCard.css';
+import { getLanguage } from "../../../utility/LangUtil";
 
 type ClientSummaryCardProps = {
   client: Client,
@@ -28,9 +29,9 @@ export default function ClientSummaryCard({
         <dt>Date of Birth</dt>
         <dd>{ client.dob || '-' }</dd>
         <dt>Main Language</dt>
-        <dd>{ client.main_language || '-' }</dd>
+        <dd>{ getLanguage(client.main_language) || '-' }</dd>
         <dt>Secondary Language</dt>
-        <dd>{ client.secondary_language || '-' }</dd>
+        <dd>{ getLanguage(client.secondary_language) || '-' }</dd>
         <dt>Funding Source</dt>
         <dd>{ funding?.name || '-' }</dd>
       </dl>

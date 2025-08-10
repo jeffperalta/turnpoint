@@ -1,15 +1,23 @@
 import { Funding } from "./Funding";
+import { getLanguage } from "../utility/LangUtil";
+import { format } from 'date-fns';
 
 export class Client {
   id: number;
   identification: string;
   name: string;
   dob: string;
-  main_language: string;
-  secondary_language: string;
+  main_language: string;      //2-letter code
+  secondary_language: string; //2-letter code
   funding: Funding;
 
   funding_source_id: number;
+
+  //--Computed properties--
+  dob_display: string;
+  main_language_display: string;
+  secondary_language_display: string;
+  
 
   constructor(json?: any) {
     this.id = json?.id ?? '';
@@ -22,7 +30,12 @@ export class Client {
     this.funding = Funding.deserialize({
       id: this.funding_source_id,
       name: json?.funding_source_name ?? null
-    })
+    });
+
+    this.dob_display = this.dob ? format(new Date(this.dob), 'dd MMM yyyy') : "";
+    this.main_language_display = getLanguage(this.main_language);
+    this.secondary_language_display = getLanguage(this.secondary_language);
+  
   }
 
   static deserialize(json: any) {
