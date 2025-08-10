@@ -47,13 +47,21 @@ export default function ClientPage() {
         return value ? getLanguage(value) : '';
       },  
     },
-    { accessorKey: 'secondary_language', header: 'Secondary Language'},
+    { 
+      accessorKey: 'secondary_language', 
+      header: 'Secondary Language',
+      Cell: ({ cell }) => {
+        const value = cell.getValue<string>();
+        return value ? getLanguage(value) : '';
+      },  
+    },
     { accessorKey: 'funding.name', header: 'Funding Source' },
   ], []);
 
   async function handleDelete(id?: number) {
     if (!id) return;
-    //TODO: if (!confirm('Delete this client?')) return;
+    // eslint-disable-next-line no-restricted-globals
+    if (!confirm('Delete this client?')) return;
     await clientService.delete(id);
     load();
   }
