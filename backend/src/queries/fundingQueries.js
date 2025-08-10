@@ -4,7 +4,9 @@ const baseFields = [
   'created_at',
   'updated_at',
   'id',
-  'name'
+  'name',
+  'fullName',
+  'description'
 ];
 
 async function getAllFundingsQuery() {
@@ -15,6 +17,17 @@ async function getAllFundingsQuery() {
   return rows;
 }
 
+async function checkEligibilityQuery(fundingId) {
+  // TODO: Call External URL: fundings.sampleEligibilityURL
+  const [rows] = await db.query(`
+    SELECT name, fullName, description, fakeEligibilityResult 
+    FROM funding_sources
+    WHERE id=?;
+  `, [fundingId]);
+  return rows;
+}
+
 module.exports = {
   getAllFundingsQuery,
+  checkEligibilityQuery,
 };

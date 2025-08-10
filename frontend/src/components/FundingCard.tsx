@@ -28,7 +28,7 @@ export default function EligibilityCard({
         </div>
         
         <div className="title">
-          Title – ABC
+          {title}
         </div>
         
         <div className="description--container">

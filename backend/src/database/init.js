@@ -20,17 +20,60 @@ function initDatabase() {
       created_at DATE NOT NULL,
       updated_at DATE NULL,
       id INT AUTO_INCREMENT PRIMARY KEY,
-      name VARCHAR(255) UNIQUE
+      name VARCHAR(10) UNIQUE,
+      fullName VARCHAR(255) NULL,
+      description TEXT NULL,
+      eligibilityURL VARCHAR(255) NULL,
+      fakeEligibilityResult TEXT NULL
     )`, 
     () => {
       // Seed 
       const newDate = new Date();
-      const sources = ['NDIS', 'HCP', 'CHSP', 'DVA', 'HACC'];
+      const sources = [
+        {
+          name: 'NDIS',
+          fullName: 'National Disability Insurance Scheme',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar non dui quis auctor. Aliquam imperdiet, elit ut faucibus bibendum, sem justo accumsan odio, sit amet fermentum arcu mi id nibh.',
+          sampleEligibilityURL: 'https://www.ndis.com',
+          fakeEligibilityResult: '{"result": "valid", "message": "Meets age requirement and residency criteria."}'
+        },
+        {
+          name: 'HCP',
+          fullName: 'Home Care Package',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar non dui quis auctor. Aliquam imperdiet, elit ut faucibus bibendum, sem justo accumsan odio, sit amet fermentum arcu mi id nibh.',
+          sampleEligibilityURL: 'https://www.hcp.com',
+          fakeEligibilityResult: '{"result": "valid", "message": "Meets age requirement and residency criteria."}'
+        },
+        {
+          name: 'CHSP',
+          fullName: 'Commonwealth Home Support Programme',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar non dui quis auctor. Aliquam imperdiet, elit ut faucibus bibendum, sem justo accumsan odio, sit amet fermentum arcu mi id nibh.',
+          sampleEligibilityURL: 'https://www.chsp.com',
+          fakeEligibilityResult: '{"result": "valid", "message": "Meets age requirement and residency criteria."}'
+        },
+        {
+          name: 'DVA',
+          fullName: 'Department of Veteran\'s Affairs',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar non dui quis auctor. Aliquam imperdiet, elit ut faucibus bibendum, sem justo accumsan odio, sit amet fermentum arcu mi id nibh.',
+          sampleEligibilityURL: 'https://www.dva.com',
+          fakeEligibilityResult: '{"result": "valid", "message": "Meets age requirement and residency criteria."}'
+        },
+        {
+          name: 'HACC',
+          fullName: 'Home and Community Care Program',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar non dui quis auctor. Aliquam imperdiet, elit ut faucibus bibendum, sem justo accumsan odio, sit amet fermentum arcu mi id nibh.',
+          sampleEligibilityURL: 'https://www.hacc.com',
+          fakeEligibilityResult: '{"result": "invalid", "message": "Missing income documentation."}'
+        }
+      ];
       sources.forEach(source => {
         db.query(`
-          INSERT INTO funding_sources (created_at, name) 
-          VALUES (?, ?)
-        `, [newDate, source]);
+          INSERT INTO funding_sources (created_at, name, fullName, description, eligibilityURL, fakeEligibilityResult) 
+          VALUES (?, ?, ?, ?, ?, ?)
+        `, [
+          newDate, source.name, source.fullName, source.description,
+          source.sampleEligibilityURL, source.fakeEligibilityResult
+        ]);
       });
     }
   );
