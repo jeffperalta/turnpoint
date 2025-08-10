@@ -11,6 +11,7 @@ import Loading from '../../components/UI/Loading';
 import { toast } from 'react-toastify';
 import { getLanguages } from '../../utility/LangUtil';
 import './CreateClientPage.css';
+import FundingField from './components/FundingField';
 
 const updateSchema = Yup.object({
   name: Yup.string().trim().min(2, 'Too short').required('Name is required'),
@@ -19,6 +20,11 @@ const updateSchema = Yup.object({
   main_language: Yup.string().trim().required('Main Language is required'),
   secondary_language: Yup.string(),
   funding_source_id: Yup.number().required('Funding Source is required'),
+  funding_eligibility: Yup.string().test(
+    "eligibility-check",
+    'Must be eligible for the funding source',
+    value => !value || value.toLowerCase() === "valid"
+  )
 });
 
 const fundingService = new FundingService();
@@ -109,7 +115,7 @@ export default function UpdateClientPage() {
               });
           }}
         >
-          {({ isSubmitting }) => (
+          {({ values, isSubmitting, setFieldValue, setFieldError }) => (
             <Form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <h3>Basic Info</h3>
               <div>
@@ -167,7 +173,7 @@ export default function UpdateClientPage() {
               </div>
 
               <h3>Funding</h3>
-              <div>
+              {/* <div>
                 <label htmlFor="funding_source_id">Funding Source</label>
                 <Field as="select" id="funding_source_id" name="funding_source_id">
                   <option value="">Select a funding source…</option>
@@ -179,7 +185,13 @@ export default function UpdateClientPage() {
                   name="funding_source_id"
                   render={msg => <div className="error-message">{msg}</div>}
                 />
-              </div>
+              </div> */}
+              <FundingField 
+                formValue={values}
+                fundings={dataSources.fundings}
+                setFieldValue={setFieldValue}
+                setFieldError={setFieldError}
+              />
               <div className='control--container'>
                 <button 
                   type="button" 

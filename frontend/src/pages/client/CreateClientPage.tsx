@@ -11,8 +11,7 @@ import { Funding } from '../../models/Funding';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { getLanguages } from '../../utility/LangUtil';
-import EligibilityCard from '../../components/FundingCard';
-import Empty from '../../components/UI/Empty';
+import FundingField from './components/FundingField';
 
 const STEPS = ['Basic info', 'Funding', 'Summary'];
 
@@ -26,7 +25,7 @@ const stepSchemas = [
   }),
   Yup.object({
     funding_source_id: Yup.number().required('Funding Source is required'),
-    eligibility: Yup.string().test(
+    funding_eligibility: Yup.string().test(
       "eligibility-check",
       'Must be eligible for the funding source',
       value => !value || value.toLowerCase() === "valid"
@@ -37,7 +36,7 @@ const stepSchemas = [
 
 const fieldsByStep = [
   ['name', 'identification', 'dob', 'main_language', 'secondary_language'],
-  ['funding_source_id', 'eligibility'],
+  ['funding_source_id', 'funding_eligibility'],
   [],
 ];
 
@@ -47,7 +46,6 @@ const clientService = new ClientService();
 export default function CreateClientPage() {
   const [step, setStep] = useState(0);
   const [fundings, setFundings] = useState<Funding[]>([]);
-  const [fundingEligibility, setFundingEligibility] = useState<Funding | null>(null);
   const navigate = useNavigate();
 
   const load = useCallback(async ()=> {
@@ -174,60 +172,12 @@ export default function CreateClientPage() {
 
             {/* Step 2: Funding */}
             {step === 1 && (
-              <>
-                <div>
-                  <label htmlFor="funding_source_id">Funding Source</label>
-                  <Field 
-                    as="select" 
-                    id="funding_source_id" 
-                    name="funding_source_id"
-                    onChange={async (e: React.ChangeEvent<HTMLSelectElement>) => {
-                      setFundingEligibility(null);
-                      const value = e.target.value;
-                      const result = await fundingService.checkElibility({
-                        fundingId: value
-                      });
-                      const fundingEligibilityResults = result.data as Funding | null;
-                      setFundingEligibility(fundingEligibilityResults);
-                      setFieldValue("funding_source_id", value);
-                      const eligibilityValue = fundingEligibilityResults?.eligibilityResult ? "valid":"invalid";
-                      setFieldValue("eligibility", eligibilityValue);
-                      if(eligibilityValue==="valid") setFieldError("eligibility",  undefined)
-                    }}
-                  >
-                    <option value="">Select a funding source…</option>
-                    {fundings.map((o) => (
-                      <option key={o.id} value={o.id}>{o.name}</option>
-                    ))}
-                  </Field>
-                  <ErrorMessage
-                    name="funding_source_id"
-                    render={msg => <div className="error-message">{msg}</div>}
-                  />
-                  <Field type="hidden" name="eligibility" />
-                  <ErrorMessage
-                    name="eligibility"
-                    render={msg => <div className="error-message">{msg}</div>}
-                  />
-                </div>
-                <div>
-                  {
-                    !fundingEligibility && 
-                    <Empty 
-                      message='Please select a funding source'
-                    />
-                  }
-                  {
-                    !!fundingEligibility && 
-                    <EligibilityCard
-                      title={fundingEligibility?.fullName}
-                      description={fundingEligibility?.description}
-                      eligibilitySummary={fundingEligibility?.eligibilityMessage}
-                      eligible={fundingEligibility?.eligibilityResult}
-                    />
-                  }
-                </div>
-              </>
+              <FundingField 
+                formValue={values}
+                fundings={fundings}
+                setFieldValue={setFieldValue}
+                setFieldError={setFieldError}
+              />
             )}
 
             {/* Step 3: Summary */}
