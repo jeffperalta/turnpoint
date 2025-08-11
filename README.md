@@ -3,6 +3,27 @@
 
 A client management web application built with React, Node.js, Express, and MySQL.
 
+## 💡 Assumptions
+
+- **Single vs. Multi-Tenant Database** – For this exercise, the application is assumed to be **single-tenant**, meaning only one company will have access to the database.
+- **Multi-Tenant Considerations** – In a multi-tenant database, records (e.g., clients, fundings) would require an additional key for logical separation of data, affecting both API design and authentication mechanisms.
+  
+- **Scope** – The focus is solely on **client management**. Other setup features (e.g., user login, account management/registration) are assumed to be handled separately.  
+- **API Coverage** – The APIs implemented are specific to client and funding management. A list of possible API is listed below.
+  
+- **Initial Version Fields** – The initial version of the software includes specific client fields (e.g. Name, Birthdate, Language) 
+- **Client Info** – Clients can be of any birthdate/age. The name field saves the full name.
+- **Unique Client Record** - To ensure unique identification and avoid duplicate records, an **identification ID** (e.g., passport number, national ID) is included.
+- **Language Rules** – The primary (main) language and secondary language must not be the same.
+  
+- **Fundings** –  
+  - The available funding sources are predefined in the database (e.g. NDIS, HCP, DVA, CHSP, HACC). A company can have a different list of supported funding sources.
+  - Each funding source may have a unique method for checking eligibility, such as integration with an external API. For simulation purposes, these are stored in the fundings db table (e.g funding_souces.eligibilityURL, funding_souces.fakeEligibilityResult).  
+  - A client can have only **one primary eligible funding**. Future versions may allow multiple funding sources.  
+  - Fundings are optional at client creation to allow saving basic information until a suitable funding source is determined.  
+ 
+- **Record Management** – Clients can be edited or deleted within the application without triggering updates to any external funding system.  
+
 ## 📦 Prerequisites
 Before you begin, ensure you have the following installed:
 - [Node.js](https://nodejs.org/) v22  
