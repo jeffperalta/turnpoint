@@ -38,7 +38,8 @@ export default function FundingField({
     }else{
       setFieldValue("funding_source_id", fundingId);
       setFieldValue("funding_eligibility", "");
-      setFieldError("funding_eligibility",  undefined)
+      setFieldError("funding_eligibility",  undefined);
+      setFundingEligibility(null);
     }
   }, []);
 
