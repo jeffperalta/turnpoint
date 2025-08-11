@@ -103,7 +103,7 @@ POST  /api/fundings/check-eligibility
 ```
 
 **Adminer (dev - access to database):**
-The database tables are created and seeded with sample data on the first run of the backend application
+_The database tables are created and seeded with sample data on the first run of the backend application_
 ```bash
 http://localhost:8080
 
