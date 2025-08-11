@@ -35,9 +35,8 @@ Before you begin, ensure you have the following installed:
 ## 💾 Download & Install
 ```bash
 git clone https://github.com/jeffperalta/turnpoint.git
-cd turnpoint
-npm install
 
+cd turnpoint
 cd backend
 npm install
 
