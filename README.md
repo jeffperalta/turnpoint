@@ -14,14 +14,30 @@ Before you begin, ensure you have the following installed:
 ```bash
 git clone https://github.com/jeffperalta/turnpoint.git
 ```
+```bash
 Folder Structure:
 turnpoint/
 ├── backend/
-│   └── .env
+│   └── .env 
 ├── frontend/
 │   └── .env
 ├── mysql-db/
 │   └── docker-compose.yml
+```
+## ⚙️ Setup Environment file (backend)
+```bash
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=user
+DB_PASSWORD=passw0rd
+DB_NAME=turnpoint_client_db
+PORT=5001
+```
+
+## ⚙️ Setup Environment file (frontend)
+```bash
+REACT_APP_API_BASE_URL=http://localhost:5001
+```
 
 ## 🚀 Run
 ```bash
