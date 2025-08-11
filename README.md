@@ -62,11 +62,11 @@ npm start
 ```
 
 ## 🌐 Applications
-User Interface:
+**User Interface:**
 ```bash
 http://localhost:3000
 ```
-APIs:
+**APIs:**
 ```bash
 Client Resource:
 GET    /api/clients
@@ -80,7 +80,7 @@ GET   /api/fundings
 POST  /api/fundings/check-eligibility
 ```
 
-Adminer (dev - access to database):
+**Adminer (dev - access to database):**
 ```bash
 http://localhost:8080
 
