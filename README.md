@@ -13,18 +13,28 @@ Before you begin, ensure you have the following installed:
 ## 💾 Download & Install
 ```bash
 git clone https://github.com/jeffperalta/turnpoint.git
+cd turnpoint
+npm install
+
+cd backend
+npm install
+
+cd ../frontend
+npm install
 ```
 ```bash
 Folder Structure:
 turnpoint/
 ├── backend/
+│   └── node_modules 
 │   └── .env 
 ├── frontend/
+│   └── node_modules 
 │   └── .env
 ├── mysql-db/
 │   └── docker-compose.yml
 ```
-## ⚙️ Setup Environment file (backend)
+## ⚙️ Setup Environment file (backend .env)
 ```bash
 DB_HOST=localhost
 DB_PORT=3306
@@ -34,24 +44,37 @@ DB_NAME=turnpoint_client_db
 PORT=5001
 ```
 
-## ⚙️ Setup Environment file (frontend)
+## ⚙️ Setup Environment file (frontend .env)
 ```bash
 REACT_APP_API_BASE_URL=http://localhost:5001
 ```
 
-## 🚀 Run
+## 🚀 Run Application
 ```bash
-cd turnpoint
-npm install
+cd mysql-db
+docker-compose up -d
 
-cd backend
-npm install
+cd ../backend
 npm run dev
 
 cd ../frontend
-npm install
 npm start
-
-cd ../mysql-db
-docker-compose up -d  
 ```
+
+## 🌐 Applications
+```bash
+Main Application:
+http://localhost:3000
+```
+```bash
+Adminer (dev - access to database):
+http://localhost:8080
+
+Login
+System: MySQL
+Server: mysql
+Username: user
+Password: passw0rd
+Database: turnpoint_client_db
+```
+
