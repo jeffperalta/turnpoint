@@ -1,5 +1,5 @@
 # TurnPoint Software Challenge
-## Name: Jo Jefferson Peralta
+**Submitted by: Jo Jefferson Peralta**
 
 A client management web application built with React, Node.js, Express, and MySQL.
 
@@ -11,14 +11,15 @@ A client management web application built with React, Node.js, Express, and MySQ
 - **Scope** – The focus is solely on **client management**. Other setup features (e.g., user login, account management/registration) are assumed to be handled separately.  
 - **API Coverage** – The APIs implemented are specific to client and funding management. A list of possible API is listed in a separate section below.
   
-- **Initial Version Fields** – The initial version of the software includes specific client fields (e.g. Name, Birthdate, Language) 
-- **Client Info** – Clients can be of any birthdate/age. The name field saves the full name.
-- **Unique Client Record** - To ensure unique identification and avoid duplicate records, an **identification ID** (e.g., passport number, national ID) is included.
+- **Initial Client Fields** – The initial version of the software includes specific client fields (e.g. Name, Birthdate, Language).
+- **Data Privacy (PDPA)** – Only essential client data is stored, in compliance with **PDPA** guidelines. Fields required for future funding schemes can be easily added to the database, APIs, and UI as the system is designed for extensibility.  
+- **Client Info** – Clients may have any birthdate or age, and the name field stores the full legal name.
+- **Unique Client Record** - To ensure unique identification and avoid duplicate client records, an **identification ID** (e.g., passport number, national ID, MediCare cards) is included.
 - **Language Rules** – The primary (main) language and secondary language must not be the same.
   
 - **Fundings** –  
   - The available funding sources are predefined in the database (e.g. NDIS, HCP, DVA, CHSP, HACC). A company can have a different list of supported funding sources.
-  - Each funding source may have a unique method for checking eligibility, such as integration with an external API. For simulation purposes, these are stored in the fundings db table (e.g funding_souces.eligibilityURL, funding_souces.fakeEligibilityResult).  
+  - Each funding source may have a unique method for checking eligibility, such as integration with an external API. For simulation purposes, these are stored in the fundings db table (e.g **funding_souces.eligibilityURL, funding_souces.fakeEligibilityResult**).  
   - A client can have only **one primary eligible funding**. Future versions may allow multiple funding sources.  
   - Fundings are optional at client creation to allow saving basic information until a suitable funding source is determined.  
  
