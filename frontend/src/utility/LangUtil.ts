@@ -187,7 +187,9 @@ const LANGUAGES: { [key: string]: string } = {
 }
 
 export const getLanguages = () => 
-  Object.entries(LANGUAGES).map(([id, name]) => ({
+  Object.entries(LANGUAGES)
+  .sort(([keya, a], [keyb, b]) => a.localeCompare(b))
+  .map(([id, name]) => ({
     id,
     name
   }));
