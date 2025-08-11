@@ -9,7 +9,7 @@ A client management web application built with React, Node.js, Express, and MySQ
 - **Multi-Tenant Considerations** – In a multi-tenant database, records (e.g., clients, fundings) would require an additional key for logical separation of data, affecting both API design and authentication mechanisms.
   
 - **Scope** – The focus is solely on **client management**. Other setup features (e.g., user login, account management/registration) are assumed to be handled separately.  
-- **API Coverage** – The APIs implemented are specific to client and funding management. A list of possible API is listed below.
+- **API Coverage** – The APIs implemented are specific to client and funding management. A list of possible API is listed in a separate section below.
   
 - **Initial Version Fields** – The initial version of the software includes specific client fields (e.g. Name, Birthdate, Language) 
 - **Client Info** – Clients can be of any birthdate/age. The name field saves the full name.
