@@ -11,9 +11,26 @@
     align-items: center;
   }
 
+  .app-link {
+    color: #fff; 
+    text-decoration: none;
+    font-weight: bold;
+  }
+
   .logo-container{
     font-weight: bold;
     font-size: 1.2rem;
+
+    .app-link {
+      display: flex;
+      align-items: center; 
+    }
+  }
+
+  .app-logo {
+    height: 40px;
+    width: auto;
+    margin-right: 8px;
   }
 
   .link-container { 
@@ -21,9 +38,4 @@
     gap: 1rem;
   }
 
-  .app-link {
-    color: #fff; 
-    text-decoration: none;
-    font-weight: bold;
-  }
 }

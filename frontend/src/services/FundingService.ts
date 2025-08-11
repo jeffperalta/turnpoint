@@ -19,7 +19,6 @@ export class FundingService extends BaseService {
   async checkElibility(payload: any): Promise<ServiceResponse> {
       try {
         const response = await this.api.post('/check-eligibility', payload);
-        console.log(">>>HEY raw response", response)
         return {
           data: new Funding(response.data),
           success: true,

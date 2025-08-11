@@ -44,11 +44,9 @@ export default function CreateClientPage() {
   useEffect(() => { load(); }, [load]);
 
   const next = async (validateForm: any, setTouched: any, values: any, errors: any) => {
-    console.log(">>>HEY next", values, errors);
     // Validate only fields in the current step
     const currentFields = fieldsByStep[step];
     const touchedMap = currentFields.reduce((acc, k) => ({ ...acc, [k]: true }), {});
-    console.log(">>>HEY currentFields, touchedMap", currentFields, touchedMap);
     setTouched(touchedMap, false);
 
     const stepErrors = Object.keys(errors || {}).filter((k) => currentFields.includes(k))
@@ -81,10 +79,8 @@ export default function CreateClientPage() {
         validateOnBlur={true}
         validateOnChange={false}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(">>>HEY submit", step, values);
           clientService.create(values)
             .then(res => {
-              console.log(">>>HEY Create response", res);
 
               if(res.success) {
                 toast.success(res.message);

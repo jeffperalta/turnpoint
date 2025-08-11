@@ -1,6 +1,7 @@
 import { Client } from "../../../models/Client";
 import './ClientSummaryCard.css';
 import { getLanguage } from "../../../utility/LangUtil";
+import { format } from 'date-fns';
 
 type ClientSummaryCardProps = {
   client: Client,
@@ -15,7 +16,6 @@ export default function ClientSummaryCard({
   fundings,
   ...props
 }: ClientSummaryCardProps) {
-  console.log(">>>CLIENT", client, fundings);
   const funding = fundings?.find(f => f.id == client.funding_source_id);
 
   return (
@@ -27,7 +27,7 @@ export default function ClientSummaryCard({
         <dt>Name</dt>
         <dd>{ client.name || '-' }</dd>
         <dt>Date of Birth</dt>
-        <dd>{ client.dob || '-' }</dd>
+        <dd>{client.dob ? format(new Date(client.dob), 'dd MMM yyyy') : '-'}</dd>
         <dt>Main Language</dt>
         <dd>{ getLanguage(client.main_language) || '-' }</dd>
         <dt>Secondary Language</dt>

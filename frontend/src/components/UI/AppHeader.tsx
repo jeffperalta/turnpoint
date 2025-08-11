@@ -6,8 +6,13 @@ export default function AppHeader() {
     <header className='app-header'>
         <nav>
           <div className="logo-container">
-            <Link to="/"className='app-link'>
-              MyAppLogo
+            <Link to="/" className='app-link'>
+              <img 
+                src="/logo192.png" 
+                alt="Logo" 
+                className="app-logo"
+              />
+              <span>TurnPoint Software - Company ABC</span>
             </Link>
           </div>
           <div className="link-container">

@@ -43,7 +43,6 @@ export default function FundingField({
   }, []);
 
   useEffect(() => {
-    console.log(">>>formValue", formValue)
     if(formValue?.funding_source_id) {
       checkEligibility(formValue?.funding_source_id);
     }

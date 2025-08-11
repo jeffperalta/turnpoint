@@ -92,7 +92,6 @@ export default function UpdateClientPage() {
             console.log('Updated:', values)
             clientService.update(clientId, values)
               .then(res => {
-                console.log(">>>HEY update response", res);
                 if(res.success) {
                   toast.success(res.message);
                   navigate('/clients');
