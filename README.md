@@ -13,7 +13,7 @@ Before you begin, ensure you have the following installed:
 ## 💾 Download & Install
 ```bash
 git clone https://github.com/jeffperalta/turnpoint.git
-
+```
 Folder Structure:
 turnpoint/
 ├── backend/
@@ -38,4 +38,4 @@ npm start
 
 cd ../mysql-db
 docker-compose up -d  
-
+```
