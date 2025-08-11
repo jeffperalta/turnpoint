@@ -198,7 +198,7 @@ export default function CreateClientPage() {
                     // onClick={handleSubmit}
                     disabled={isSubmitting}
                     className='action--button'
-                  >Register Client
+                  >Add Client
                   </button>
                 )}
             </div>
