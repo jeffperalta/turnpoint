@@ -62,12 +62,21 @@ npm start
 ```
 
 ## 🌐 Applications
+###Front-end:
 ```bash
-Main Application:
 http://localhost:3000
 ```
+###APIs:
 ```bash
-Adminer (dev - access to database):
+GET    /api/clients
+GET    /api/clients/:id
+POST   /api/clients
+PUT    /api/clients/:id
+DELETE /api/clients/:id
+```
+
+###Adminer (dev - access to database):
+```bash
 http://localhost:8080
 
 Login
