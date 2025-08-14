@@ -13,7 +13,6 @@ async function createHash(password) {
 }
 
 async function compareHash(text, hash) {
-  console.log(">>>HEY compareHash", text, hash)
   return await bcrypt.compare(text, hash);
 }
 
