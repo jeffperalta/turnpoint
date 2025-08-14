@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 require('./database/init')();
 
+const authRoutes = require('./routes/auth');
 const clientRoutes = require('./routes/clients');
 const fundingRoutes = require('./routes/fundings');
 
@@ -10,6 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/auth', authRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/fundings', fundingRoutes);
 
