@@ -11,7 +11,8 @@ const {
   issueSession, 
   compareHash,
   requireAuth, 
-  destroySession 
+  destroySession,
+  touchSession
 } = require('../session');
 
 router.post('/register', async(req, res) => {
@@ -78,6 +79,11 @@ router.post('/login', async(req, res) => {
 router.post('/logout', requireAuth, async(req, res) => {
   destroySession(req.sessionToken);
   res.json({ ok: true });
+});
+
+router.get('/me', requireAuth, async (req, res) => {
+  touchSession(req.sessionToken);
+  res.json({ user: req.user });
 });
 
 

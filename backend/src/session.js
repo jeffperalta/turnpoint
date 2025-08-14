@@ -48,10 +48,19 @@ function requireAuth(req, res, next) {
   next();
 }
 
+function touchSession(token) {
+  const sess = sessions.get(token);
+  if (sess) {
+    sess.expiresAt = Date.now() + TOKEN_TTL_MS; // extend
+    sessions.set(token, sess);
+  }
+}
+
 module.exports = {
   issueSession,
   destroySession,
   requireAuth,
   createHash,
-  compareHash
+  compareHash,
+  touchSession
 };

@@ -26,4 +26,41 @@ export class AuthService extends BaseService {
       };
     }
   }
+
+  async logout(): Promise<ServiceResponse> {
+    try {
+      await this.api.post('/logout');
+      setSessionToken('');
+      return {
+        data: null,
+        success: true,
+        message: 'Logout successful'
+      };
+    } catch (err: any) {
+      return {
+        data: null,
+        success: false,
+        message: err.response?.data?.error 
+          || 'Failed to logout.',
+      };
+    }
+  }
+
+  async me(): Promise<ServiceResponse> {
+    try {
+      const response = await this.api.get('/me');
+      return {
+        data: User.deserialize(response.data),
+        success: true,
+        message: 'OK'
+      };
+    } catch (err: any) {
+      return {
+        data: null,
+        success: false,
+        message: err.response?.data?.error 
+          || 'INVALID',
+      };
+    }
+  }
 }
