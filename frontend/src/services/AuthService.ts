@@ -1,6 +1,6 @@
 import { BaseService } from "./BaseService";
 import { User } from '../models/User';
-import { setSessionToken } from "../utility/SessionUtil";
+import { clearSessionToken, setSessionToken } from "../utility/SessionUtil";
 import { ServiceResponse } from "./ServiceResponse";
 
 export class AuthService extends BaseService {
@@ -30,7 +30,7 @@ export class AuthService extends BaseService {
   async logout(): Promise<ServiceResponse> {
     try {
       await this.api.post('/logout');
-      setSessionToken('');
+      clearSessionToken()
       return {
         data: null,
         success: true,
