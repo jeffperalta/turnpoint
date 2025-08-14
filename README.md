@@ -8,7 +8,8 @@ A client management web application built with React, Node.js, Express, and MySQ
 - **Single vs. Multi-Tenant Database** – For this exercise, the application is assumed to be **single-tenant**, meaning only one company will have access to the database.
 - **Multi-Tenant Considerations** – In a multi-tenant database, records (e.g., clients, fundings) would require an additional key for logical separation of data, affecting both API design and authentication mechanisms.
   
-- **Scope** – The focus is solely on **client management**. Other setup features (e.g., user login, account management/registration) are assumed to be handled separately.  
+- **Scope** – The focus is solely on **client management**. Other setup features (e.g. account management/registration) are assumed to be handled separately.
+  - Simple User Login, API, and Route Protection included in this version.
 - **API Coverage** – The APIs implemented are specific to client and funding management. A list of possible API is listed in a separate section below.
   
 - **Initial Client Fields** – The initial version of the software includes specific client fields (e.g. Name, Birthdate, Language).
@@ -86,6 +87,8 @@ npm start
 **User Interface:**
 ```bash
 http://localhost:3000
+Username: test@email.com
+Password: Passw0rd!
 ```
 **APIs:**
 ```bash
@@ -99,6 +102,13 @@ DELETE /api/clients/:id
 Funding Resource:
 GET   /api/fundings
 POST  /api/fundings/check-eligibility
+
+Auth Resource:
+POST  /api/auth/login
+POST  /api/auth/logout
+POST  /api/auth/register
+GET   /api/auth/me 
+
 ```
 
 **Adminer (dev - access to database):**
