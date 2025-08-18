@@ -5,8 +5,8 @@ import * as Yup from 'yup';
 import { Client } from '../../models/Client';
 import { Funding } from '../../models/Funding';
 import { useNavigate } from 'react-router-dom';
-import { FundingService } from '../../services/FundingService';
-import { ClientService } from '../../services/ClientService';
+import fundingService from '../../services/FundingService';
+import clientService from '../../services/ClientService';
 import Loading from '../../components/UI/Loading';
 import { toast } from 'react-toastify';
 import { getLanguages } from '../../utility/LangUtil';
@@ -15,8 +15,6 @@ import FundingField from './components/FundingField';
 import FormTooltip from '../../components/UI/FormTooltip';
 
 const updateSchema = Yup.object(Client.validationSchema());
-const fundingService = new FundingService();
-const clientService = new ClientService();
 
 export default function UpdateClientPage() {
   const navigate = useNavigate();

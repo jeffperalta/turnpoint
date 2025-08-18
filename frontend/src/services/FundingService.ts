@@ -35,3 +35,6 @@ export class FundingService extends BaseService {
       }
     }
 }
+
+const fundingService = new FundingService();
+export default fundingService;

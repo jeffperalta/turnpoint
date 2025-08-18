@@ -1,8 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { AuthService } from '../services/AuthService';
+import authService from '../services/AuthService';
 import { useEffect, useState } from 'react';
-
-const authService = new AuthService();
 
 export default function ProtectedRoute() {
   const token = localStorage.getItem('sessionToken');

@@ -81,3 +81,6 @@ export class ClientService extends BaseService {
     }
   }
 }
+
+const clientService = new ClientService();
+export default clientService;

@@ -1,13 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {SchemaGroups, User} from '../../models/User';
-import { AuthService } from '../../services/AuthService';
+import authService from '../../services/AuthService';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './LoginPage.css';
 import * as Yup from 'yup';
-
-
-const authService = new AuthService();
 
 const LoginPage = () => {
   const navigate = useNavigate();

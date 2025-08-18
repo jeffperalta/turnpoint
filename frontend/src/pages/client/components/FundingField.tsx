@@ -1,11 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Field, ErrorMessage } from 'formik';
 import { Funding } from '../../../models/Funding';
-import { FundingService } from '../../../services/FundingService';
+import fundingService from '../../../services/FundingService';
 import Empty from '../../../components/UI/Empty';
 import EligibilityCard from '../../../components/FundingCard';
-
-const fundingService = new FundingService();
 
 interface FundingFieldProps {
   fundings: Funding[];

@@ -1,9 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import './AppHeader.css';
 import { getSessionToken } from '../../utility/SessionUtil';
-import { AuthService } from '../../services/AuthService';
-
-const authService = new AuthService();
+import authService from '../../services/AuthService';
 
 export default function AppHeader() {
   const navigate = useNavigate();

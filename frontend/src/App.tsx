@@ -1,8 +1,6 @@
 import './App.css';
 import { User } from './models/User';
-import { AuthService } from './services/AuthService';
-
-const authService = new AuthService();
+import authService from './services/AuthService';
 
 function App() {
   

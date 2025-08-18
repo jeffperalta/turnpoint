@@ -1,14 +1,12 @@
 import {useCallback, useState, useEffect, useMemo} from 'react';
 import {MaterialReactTable, MRT_ColumnDef } from 'material-react-table';
 import { Client } from '../../models/Client';
-import { ClientService } from '../../services/ClientService';
+import clientService from '../../services/ClientService';
 import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link, useNavigate } from 'react-router-dom';
-
-const clientService = new ClientService();
 
 export default function ClientPage() {
   const [data, setData] = useState<Client[]>([]);

@@ -5,6 +5,7 @@ import { ServiceResponse } from "./ServiceResponse";
 
 export class AuthService extends BaseService {
   constructor() {
+    console.log(">>>NEW AUTH")
     super('/api/auth')
   }
 
@@ -64,3 +65,6 @@ export class AuthService extends BaseService {
     }
   }
 }
+
+const authService = new AuthService();
+export default authService;

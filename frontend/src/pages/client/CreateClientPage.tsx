@@ -5,8 +5,8 @@ import './CreateClientPage.css';
 import WizardHeader from '../../components/WizardHeader';
 import { Client, SchemaGroups } from '../../models/Client';
 import ClientSummaryCard from './components/ClientSummaryCard';
-import { FundingService } from '../../services/FundingService';
-import { ClientService } from '../../services/ClientService';
+import fundingService from '../../services/FundingService';
+import clientService from '../../services/ClientService';
 import { Funding } from '../../models/Funding';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -27,9 +27,6 @@ const fieldsByStep = [
   ['funding_source_id', 'funding_eligibility'],
   [],
 ];
-
-const fundingService = new FundingService();
-const clientService = new ClientService();
 
 export default function CreateClientPage() {
   const [step, setStep] = useState(0);
