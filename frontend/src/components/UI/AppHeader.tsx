@@ -1,7 +1,22 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './AppHeader.css';
+import { getSessionToken } from '../../utility/SessionUtil';
+import { AuthService } from '../../services/AuthService';
+
+const authService = new AuthService();
 
 export default function AppHeader() {
+  const navigate = useNavigate();
+  const token = getSessionToken();
+
+  const handleLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    authService.logout()
+      .then(() => {
+        navigate('/login')
+      })
+  }
+
   return <>
     <header className='app-header'>
         <nav>
@@ -16,9 +31,19 @@ export default function AppHeader() {
             </Link>
           </div>
           <div className="link-container">
-            <Link to="/clients" className='app-link'>
-              Clients
-            </Link>
+            {token ? (
+              <>
+                <Link to="/clients" className='app-link'>
+                  Clients
+                </Link>
+                <Link to="#" onClick={handleLogout}className='app-link'>
+                  Logout
+                </Link>
+              </>
+            ) : (
+              <Link to="/login" className='app-link'>Login</Link>
+            )}
+            
           </div>
         </nav>
       </header>

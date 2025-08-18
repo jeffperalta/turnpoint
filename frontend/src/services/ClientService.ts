@@ -12,7 +12,8 @@ export class ClientService extends BaseService {
       const response = await this.api.get('/');
       return response.data.map((item: any) => Client.deserialize(item));
     } catch (err: any) {
-      throw new Error('Failed to fetch client records.');
+      console.error('Failed to fetch client records.');
+      return [];
     }
   }
 
@@ -21,7 +22,8 @@ export class ClientService extends BaseService {
       const response = await this.api.get(`/${id}`);
       return Client.deserialize(response.data);
     } catch (err: any) {
-      throw new Error('Failed to fetch client record.');
+      console.error('Failed to fetch client record.');
+      return new Client();
     }
   }
 

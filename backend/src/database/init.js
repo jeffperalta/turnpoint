@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
 const createTable = require('./util');
+const { createHash } = require('../session');
 
 require('dotenv').config();
 const db = mysql.createPool({
@@ -130,6 +131,38 @@ function initDatabase() {
   )
 
   // Table: users (authentication)
+  createTable(db, 
+    'users',
+    `CREATE TABLE IF NOT EXISTS users (
+      created_at DATE NOT NULL,
+      updated_at DATE NULL,
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      email VARCHAR(255) NOT NULL UNIQUE,
+      password VARCHAR(255) NOT NULL
+    )`,
+    async () => {
+      // Seed 
+      const newDate = new Date();
+      const sources = [{
+        'created_at': newDate,
+        'updated_at': newDate,
+        'email': 'test@email.com',
+        'password': await createHash('Passw0rd!')
+      }];
+
+      sources.forEach(source => {
+        const keys = Object.keys(source);
+        const values = Object.values(source);
+        const placeholders = keys.map(() => '?').join(', ');
+        db.query(`
+          INSERT INTO users (${keys.join(', ')}) 
+          VALUES (${placeholders})
+        `,values
+        );
+      });
+    }
+  )
+
   // Table: languages lookup
 }
 

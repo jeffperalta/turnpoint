@@ -10,7 +10,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateClientPage from './pages/client/CreateClientPage';
 import UpdateClientPage from './pages/client/UpdateClientPage';
-
+import LoginPage from './pages/login/LoginPage';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,9 +23,12 @@ root.render(
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<LandingPage />} />
-          <Route path="clients" element={<ClientPage />} />
-          <Route path="clients/create" element={<CreateClientPage />} />
-          <Route path="clients/update/:id" element={<UpdateClientPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="clients" element={<ClientPage />} />
+            <Route path="clients/create" element={<CreateClientPage />} />
+            <Route path="clients/update/:id" element={<UpdateClientPage />} />
+          </Route>
         </Route>
       </Routes>
 

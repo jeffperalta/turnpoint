@@ -12,7 +12,8 @@ export class FundingService extends BaseService {
       const response = await this.api.get('/');
       return response.data.map((item: any) => Funding.deserialize(item));
     } catch (err: any) {
-      throw new Error('Failed to fetch funding records.');
+      console.error('Failed to fetch funding records.');
+      return [];
     }
   }
 
