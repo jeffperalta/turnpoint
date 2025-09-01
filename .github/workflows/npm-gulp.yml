@@ -29,8 +29,8 @@ jobs:
 
       - name: Build (gulp)
         working-directory: ./backend
-        run: npx gulp
-        # or: run: npm run build
+        #run: npx gulp
+        run: npm run build
 
       - name: Build and push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6
