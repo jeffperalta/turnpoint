@@ -5,7 +5,7 @@ import clientService from '../../services/ClientService';
 import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 // import AddIcon from '@mui/icons-material/Add';
 // import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function ClientPage() {
@@ -98,7 +98,7 @@ export default function ClientPage() {
               color="error"
               onClick={() => handleDelete(row.original.id)}
             >
-              <DeleteIcon />
+              {/* <DeleteIcon /> */}
             </IconButton>
           </Box>
         )}

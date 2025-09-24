@@ -1,5 +1,5 @@
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
+// import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+// import CancelIcon from '@mui/icons-material/Cancel';
 import './FundingCard.css';
 
 export type EligibilityCardProps = {
@@ -15,16 +15,16 @@ export default function EligibilityCard({
   eligibilitySummary,
   eligible,
 }: EligibilityCardProps) {
-  const Icon = eligible ? CheckCircleIcon : CancelIcon;
+  // const Icon = eligible ? CheckCircleIcon : CancelIcon;
 
   return (
     <>
       <div className="funding-card">
         <div className="eligibility-icon">
-          <Icon
+          {/* <Icon
             fontSize="large"
             htmlColor={eligible ? '#c0f2c2ff' : '#d97171ff'} 
-          />
+          /> */}
         </div>
         
         <div className="title">
