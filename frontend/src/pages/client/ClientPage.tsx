@@ -3,8 +3,8 @@ import {MaterialReactTable, MRT_ColumnDef } from 'material-react-table';
 import { Client } from '../../models/Client';
 import clientService from '../../services/ClientService';
 import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
+// import AddIcon from '@mui/icons-material/Add';
+// import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -64,7 +64,7 @@ export default function ClientPage() {
           component={Link}
           to="/clients/create"
           variant="contained"
-          startIcon={<AddIcon />}
+          // startIcon={<AddIcon />}
         >
           New Client
         </Button>
@@ -92,7 +92,7 @@ export default function ClientPage() {
               color="primary"
               onClick={() => navigate(`/clients/update/${row.original.id}`)}
             >
-              <EditIcon />
+              {/* <EditIcon /> */}
             </IconButton>
             <IconButton
               color="error"
