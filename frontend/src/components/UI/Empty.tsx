@@ -1,4 +1,4 @@
-import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+// import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import './Empty.css'
 
 export default function Empty({
@@ -7,7 +7,7 @@ export default function Empty({
 }) {
   return (
     <div className='empty--container'>
-      <Inventory2OutlinedIcon sx={{ fontSize: 64 }} htmlColor='#c5c5c5'/>
+      {/* <Inventory2OutlinedIcon sx={{ fontSize: 64 }} htmlColor='#c5c5c5'/> */}
       <h4>
         { message }
       </h4>
